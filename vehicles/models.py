@@ -86,7 +86,6 @@ class Vehicle(models.Model):
     )
     color = models.CharField(
         max_length=30,
-        unique=True,
         blank=True,
         null=True,
         choices=COLOR_CHOICES,
