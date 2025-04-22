@@ -13,6 +13,7 @@ class ParkingSpotAdmin(admin.ModelAdmin):
     )
     list_filter = ("is_occupied",)
     search_fields = ("spot_number",)
+    ordering = ["spot_number",]
 
 
 @admin.register(ParkingRecords)

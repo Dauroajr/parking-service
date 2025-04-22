@@ -39,9 +39,9 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-
     "rest_framework",
-    
+    "rest_framework_simplejwt",
+    "authentication",
     "customers",
     "vehicles",
     "parking",
@@ -63,7 +63,9 @@ ROOT_URLCONF = "core.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [
+            "templates",
+        ],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -74,6 +76,8 @@ TEMPLATES = [
         },
     },
 ]
+
+# APPEND_SLASH = True
 
 WSGI_APPLICATION = "core.wsgi.application"
 
@@ -138,6 +142,12 @@ NUMBER_GROUPING = 3
 DECIMAL_SEPARATOR = ","
 THOUSAND_SEPARATOR = "."
 USE_THOUSAND_SEPARATOR = True
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ],
+}
 
 
 JAZZMIN_SETTINGS = {
@@ -216,13 +226,11 @@ JAZZMIN_SETTINGS = {
         "auth": "fas fa-users-cog",
         "auth.user": "fas fa-user",
         "auth.Group": "fa-solid fa-people-group",
-
         "customers.Customer": "fa-solid fa-users",
         "parking.ParkingSpot": "fa-solid fa-square-parking",
         "parking.ParkingRecords": "fa-solid fa-boxes-packing",
         "vehicles.Vehicle": "fa-solid fa-car",
         "vehicles.VehicleType": "fa-solid fa-car-side",
-
     },
     # Icons that are used when one is not manually specified
     "default_icon_parents": "fas fa-chevron-circle-right",
@@ -278,7 +286,7 @@ JAZZMIN_UI_TWEAKS = {
     "sidebar_nav_compact_style": False,
     "sidebar_nav_legacy_style": False,
     "sidebar_nav_flat_style": False,
-    "theme": "cyborg",
+    "theme": "darkly",
     "dark_mode_theme": None,
     "button_classes": {
         "primary": "btn-primary",
