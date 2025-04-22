@@ -36,7 +36,7 @@ class Customer(models.Model):
         max_length=15,
         blank=True,
         null=True,
-        verbose_name=_("Telephone")
+        verbose_name=_("Phone Number")
     )
     created_on = models.DateTimeField(
         auto_now_add=True,

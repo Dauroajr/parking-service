@@ -12,8 +12,10 @@ class ParkingSpotAdmin(admin.ModelAdmin):
         "is_occupied",
     )
     list_filter = ("is_occupied",)
-    search_fields = ("spot_number",)
-    ordering = ["spot_number",]
+    search_fields = ("spot_number__icontains",)
+    ordering = [
+        "spot_number",
+    ]
 
 
 @admin.register(ParkingRecords)
@@ -27,15 +29,13 @@ class ParkingRecordsAdmin(admin.ModelAdmin):
         "exit_time",
     )
     search_fields = (
-        "vehicle__license_plate",
-        "parking_spot__spot_number",
+        "vehicle__license_plate__icontains",
+        "parking_spot__spot_number__icontains",
     )
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
-        if (
-            db_field.name == (
-                "parking_spot" and not request.resolver_match.url_name.endswith("change")
-            )
+        if db_field.name == (
+            "parking_spot" and not request.resolver_match.url_name.endswith("change")
         ):
             kwargs["queryset"] = ParkingSpot.objects.filter(is_occupied=False)
         return super().formfield_for_foreignkey(db_field, request, **kwargs)

@@ -39,8 +39,11 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+
     "rest_framework",
     "rest_framework_simplejwt",
+    "drf_spectacular",
+
     "authentication",
     "customers",
     "vehicles",
@@ -142,12 +145,6 @@ NUMBER_GROUPING = 3
 DECIMAL_SEPARATOR = ","
 THOUSAND_SEPARATOR = "."
 USE_THOUSAND_SEPARATOR = True
-
-REST_FRAMEWORK = {
-    "DEFAULT_AUTHENTICATION_CLASSES": [
-        "rest_framework_simplejwt.authentication.JWTAuthentication",
-    ],
-}
 
 
 JAZZMIN_SETTINGS = {
@@ -296,4 +293,21 @@ JAZZMIN_UI_TWEAKS = {
         "danger": "btn-danger",
         "success": "btn-success",
     },
+}
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ],
+    "DEFAULT_FILTER_BACKENDS": [
+        "dj_rql.drf.RQLFilterBackend",
+    ],
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+}
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": "Parking Service API",
+    "DESCRIPTION": "API for the Parking Service System",
+    "VERSION": "1.0.0",
+    # "SERVE_INCLUDE_SCHEMA": False,
 }

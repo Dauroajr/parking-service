@@ -17,7 +17,7 @@ class VehicleTypeAdmin(admin.ModelAdmin):
 
     list_display = ["name", "description"]
     search_fields = [
-        "name",
+        "name__icontains",
     ]
 
 
