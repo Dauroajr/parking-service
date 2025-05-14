@@ -1,7 +1,7 @@
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-from parking.models import ParkingRecords
+from parking.models import ParkingRecords, ParkingSpot
 
 
 @receiver(post_save, sender=ParkingRecords)

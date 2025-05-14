@@ -34,8 +34,14 @@ class ParkingRecordsAdmin(admin.ModelAdmin):
     )
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
-        if db_field.name == (
-            "parking_spot" and not request.resolver_match.url_name.endswith("change")
+        if (
+            db_field.name == "parking_spot" and not request.resolver_match.url_name.endswith("change")
         ):
             kwargs["queryset"] = ParkingSpot.objects.filter(is_occupied=False)
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
+
+    # In order to make the 'parking_spot' field a read_only, uncomment the block below
+    # def get_readonly_fields(self, request, obj=None):
+    #     if obj:
+    #         return self.readonly_fields + ("parking_spot",)
+    #     return super().get_readonly_fields(request, obj)
