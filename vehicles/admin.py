@@ -3,13 +3,13 @@ from django.contrib import admin
 from vehicles.models import Brand, Vehicle, VehicleType
 
 
-# @admin.register(Brand)
-# class BrandAdmin(admin.ModelAdmin):
-#     """Admin View for Brand"""
+@admin.register(Brand)
+class BrandAdmin(admin.ModelAdmin):
+    """Admin View for Brand"""
 
-#     list_display = ("name",)
-#     list_filter = ("name",)
-#     search_fields = ("name",)
+    list_display = ("name",)
+    list_filter = ("name",)
+    search_fields = ("name",)
 
 
 @admin.register(VehicleType)

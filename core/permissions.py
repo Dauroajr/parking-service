@@ -18,5 +18,5 @@ from rest_framework import permissions
 class IsVehicleOrRecordOwner(permissions.BasePermission):
 
     def has_object_permission(self, request, view, obj):
-        has_permissions = obj.owner == request.user
+        has_permissions = obj.owner.user == request.user
         return has_permissions
